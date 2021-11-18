@@ -2,17 +2,18 @@
 
 # Los parámetros T, t_final y N son elegidos arbitrariamente
 
+# Se importan las librerías y módulos necesarios
 import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 
-# Variables aleatorias A y Z
+# Creación de las variables aleatorias A y Z
 vaA = stats.norm(0, np.sqrt(11))
 vaZ = stats.norm(0, np.sqrt(11))
 
 # Creación del vector de tiempo
 T = 100			# número de elementos
-t_final = 10	# tiempo en segundos
+t_final = 10	        # tiempo en segundos
 t = np.linspace(0, t_final, T)
 
 # Inicialización del proceso aleatorio X(t) con N realizaciones
@@ -27,18 +28,19 @@ for i in range(N):
 	X_t[i,:] = x_t
 	plt.plot(t, x_t)
 
-# Promedio de las N realizaciones en cada instante (cada punto en t)
+# Obtención de la media o promedio de las N realizaciones en cada instante (cada punto en t)
 P = [np.mean(X_t[:,i]) for i in range(len(t))]
-plt.plot(t, P, lw=6)
+plt.plot(t, P, lw=6, label='Media')
 
 # Graficar el resultado teórico del valor esperado
 E = 0*t
-plt.plot(t, E, '-.', lw=4)
+plt.plot(t, E, '-.', lw=4, label='Valor deseado teórico')
 
 # Mostrar las realizaciones, y su promedio calculado y teórico
 plt.title('Realizaciones del proceso aleatorio $X(t)$')
 plt.xlabel('$t$')
 plt.ylabel('$x_i(t)$')
+plt.legend()
 plt.show()
 
 # T valores de desplazamiento tau
